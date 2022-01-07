@@ -2,6 +2,10 @@ package pojo;
 
 import java.util.Date;
 
+import java.util.HashSet;
+import java.util.Set;
+
+
 public class Room  implements java.io.Serializable {
 	
 	private Integer roomId;
@@ -12,6 +16,8 @@ public class Room  implements java.io.Serializable {
 	private Boolean roomSmoking;
 	private Date	roomNextAvaliableDate;
 	
+	private Set 	reservations = new HashSet(0);
+
 	/*
 	 * Construction
 	 */
@@ -41,14 +47,15 @@ public class Room  implements java.io.Serializable {
 	
 	public Room(Integer pRoomId, Integer pRoomNumber, Integer pRoomFloor,            
 				Double pRoomPrice, String pRoomType, Boolean pRoomSmoking,          
-				Date pRoomNextAvaliableDate) {
+				Date pRoomNextAvaliableDate, Set pReservations) {
 		this.setRoomId(pRoomId);                
 		this.setRoomNumber(pRoomNumber);            
 		this.setRoomFloor(pRoomFloor);             
 		this.setRoomPrice(pRoomPrice);             
 		this.setRoomType(pRoomType);              
 		this.setRoomSmoking(pRoomSmoking);           
-		this.setRoomNextAvaliableDate(pRoomNextAvaliableDate); 
+		this.setRoomNextAvaliableDate(pRoomNextAvaliableDate);
+		this.setReservations(pReservations);
 	}
 	
 	
@@ -153,5 +160,19 @@ public class Room  implements java.io.Serializable {
 	 */
 	public void setRoomNextAvaliableDate(Date roomNextAvaliableDate) {
 		this.roomNextAvaliableDate = roomNextAvaliableDate;
+	}
+
+	/**
+	 * @return the reservations
+	 */
+	public Set getReservations() {
+		return reservations;
+	}
+
+	/**
+	 * @param reservations the reservations to set
+	 */
+	public void setReservations(Set reservations) {
+		this.reservations = reservations;
 	}
 }

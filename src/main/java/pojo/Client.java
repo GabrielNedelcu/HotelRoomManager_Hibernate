@@ -2,6 +2,9 @@ package pojo;
 
 import java.util.Date;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Client implements java.io.Serializable {
 	
 	private Integer clientID;
@@ -12,6 +15,8 @@ public class Client implements java.io.Serializable {
 	private Integer	clientCNP;
 	private String	clientEmail;
 	private	Integer	clientPhone;
+	
+	private Set 	reservations = new HashSet(0);
 	
 	/*
 	 * Construction
@@ -44,7 +49,7 @@ public class Client implements java.io.Serializable {
 	
 	public Client(Integer pclientID, String pclientName, String	pclientSurname, 
 				  Date pclientBirthDay, String pclientAdress, Integer pclientCNP,
-				  String pclientEmail, Integer pclientPhone) {
+				  String pclientEmail, Integer pclientPhone, Set pReservations) {
 		this.setClientID(pclientID);
 		this.setClientName(pclientName);
 		this.setClientSurname(pclientSurname);
@@ -53,6 +58,7 @@ public class Client implements java.io.Serializable {
 		this.setClientCNP(pclientCNP);
 		this.setClientEmail(pclientEmail);
 		this.setClientPhone(pclientPhone);
+		this.setReservations(pReservations);
 	}
 	
 	
@@ -171,6 +177,20 @@ public class Client implements java.io.Serializable {
 	 */
 	public void setClientCNP(Integer clientCNP) {
 		this.clientCNP = clientCNP;
+	}
+
+	/**
+	 * @return the reservations
+	 */
+	public Set getReservations() {
+		return reservations;
+	}
+
+	/**
+	 * @param reservations the reservations to set
+	 */
+	public void setReservations(Set reservations) {
+		this.reservations = reservations;
 	}
 	
 	

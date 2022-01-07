@@ -1,1 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name="pojo.Reservation" table="reservations" catalog="hotel_manager" optimistic-lock="version">
+	 <id name="reservationID" type="java.lang.Integer">
+	 	<column name="idreservation" />
+	 	<generator class="identity" />
+	 </id>
+	 <many-to-one name="reservationRoom" class="pojo.Room" fetch="select">
+	 	<column name="idroom" />
+	 </many-to-one>
+	 <many-to-one name="reservationClient" class="pojo.Client" fetch="select">
+	 	<column name="idclient" />
+	 </many-to-one>
+	 <property name="reservationStartDate" type="date">
+	 	<column name="start_date" length="10" />
+	 </property>
+	 <property name="reservationEndDate" type="date">
+	 	<column name="end_date" length="10" />
+	 </property>
+	 <property name="reservationParking" type="java.lang.Boolean">
+	 	<column name="parking"/>
+	 </property>
+	 <property name="reservationBreakfast" type="java.lang.Boolean">
+	 	<column name="breakfast"/>
+	 </property>
+	 <property name="reservationDinner" type="java.lang.Boolean">
+	 	<column name="dinner"/>
+	 </property>
+	 <property name="reservationTotalPrice" type="double">
+	 	<column name="total_price"/>
+	 </property>
+ </class>
+</hibernate-mapping>

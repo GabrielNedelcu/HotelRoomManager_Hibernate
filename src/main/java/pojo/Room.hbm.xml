@@ -1,1 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name="pojo.Room" table="rooms" catalog="hotel_manager" optimistic-lock="version">
+	 <id name="roomId" type="java.lang.Integer">
+	 	<column name="idroom" />
+	 	<generator class="identity" />
+	 </id>
+	 <property name="roomNumber" type="java.lang.Integer">
+	 	<column name="room_number" />
+	 </property>
+	 <property name="roomFloor" type="java.lang.Integer">
+	 	<column name="floor" />
+	 </property>
+	 <property name="roomPrice" type="double">
+	 	<column name="room_price" />
+	 </property>
+	 <property name="roomType" type="string">
+	 	<column name="room_type" length="45" />
+	 </property>
+	 <property name="roomSmoking" type="java.lang.Boolean">
+	 	<column name="smoking"/>
+	 </property>
+	 <property name="roomNextAvaliableDate" type="date">
+	 	<column name="next_avaliable_date" length="10" />
+	 </property>
+	 
+	 <set name="reservations" table="reservations" inverse="true" lazy="true" fetch="select">
+	 	<key>
+	 		<column name="roomId" />
+	 	</key>
+	 	<one-to-many class="pojo.Reservation" />
+	 </set>
+ </class>
+</hibernate-mapping>

@@ -1,1 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name="pojo.Client" table="clients" catalog="hotel_manager" optimistic-lock="version">
+	 <id name="clientID" type="java.lang.Integer">
+	 	<column name="idclient" />
+	 	<generator class="identity" />
+	 </id>
+	 <property name="clientName" type="string">
+	 	<column name="name" length="45" />
+	 </property>
+	 <property name="clientSurname" type="string">
+	 	<column name="surname" length="45" />
+	 </property>
+	 <property name="clientBirthDay" type="date">
+	 	<column name="birthday" length="10" />
+	 </property>
+	 <property name="clientAddress" type="string">
+	 	<column name="adress" length="45" />
+	 </property>
+	 <property name="clientCNP" type="java.lang.Integer">
+	 	<column name="cnp"/>
+	 </property>
+	 <property name="clientEmail" type="string">
+	 	<column name="email" length="45" />
+	 </property>
+	  <property name="clientPhone" type="java.lang.Integer">
+	 	<column name="phone"/>
+	 </property>
+	 
+	 <set name="reservations" table="reservations" inverse="true" lazy="true" fetch="select">
+	 	<key>
+	 		<column name="idclient" />
+	 	</key>
+	 	<one-to-many class="pojo.Reservation" />
+	 </set>
+ </class>
+</hibernate-mapping>

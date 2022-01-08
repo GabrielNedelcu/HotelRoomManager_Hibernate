@@ -11,8 +11,8 @@
  <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
  <property name="hibernate.connection.username">root</property>
  <property name="hibernate.connection.password">a123321</property>
- <mapping resource="pojo/Consultatie.hbm.xml"/>
- <mapping resource="pojo/Pacienti.hbm.xml"/>
- <mapping resource="pojo/Medici.hbm.xml"/>
+ <mapping resource="pojo/Client.hbm.xml"/>
+ <mapping resource="pojo/Room.hbm.xml"/>
+ <mapping resource="pojo/Reservation.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>

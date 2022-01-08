@@ -53,7 +53,7 @@ public class ReservationDaoImpl implements ReservationDao{
 		Transaction transaction = session.beginTransaction();
 		
 		/* Get the reservation with the given id*/
-		Reservation reservation = (Reservation) session.load(Reservation.class, pReservationId);
+		Reservation reservation = (Reservation) session.load(Reservation.class, pReservationID);
 		
 		/* Set reservation's new data */
 		

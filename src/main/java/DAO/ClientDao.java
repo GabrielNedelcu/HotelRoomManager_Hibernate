@@ -12,4 +12,5 @@ public interface ClientDao {
 			 				   Date pclientBirthDay, String pclientAdress, Integer pclientCNP,
 			 				   String pclientEmail, Integer pclientPhone);
 	 public void deleteClient (Client pClient);
+	 public Client getClient (Integer pClientID);
 }

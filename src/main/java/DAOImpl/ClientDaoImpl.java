@@ -83,4 +83,16 @@ public class ClientDaoImpl implements ClientDao{
 		/* Close the connection */
 		session.close();
 	}
+	
+	@Override
+	public Client getClient (Integer pClientID) {
+		/* Get session and open transaction */
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = session.beginTransaction();
+		
+		/* Get the client with the given id*/
+		Client client = (Client) session.load(Client.class, pClientID);
+		
+		return client;
+	}
 }

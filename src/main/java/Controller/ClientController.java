@@ -3,6 +3,9 @@ package Controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.jasper.tagplugins.jstl.core.Set;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -18,6 +21,10 @@ import DAO.ClientDao;
 import pojo.Client;
 import DAOImpl.ClientDaoImpl;
 
+import DAO.ReservationDao;
+import pojo.Reservation;
+import DAOImpl.ReservationDaoImpl;
+
 /**
  * Servlet implementation class ClientController
  */
@@ -25,7 +32,8 @@ public class ClientController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	Client client = new Client();
-	ClientDaoImpl dataManager = new ClientDaoImpl();
+	ClientDaoImpl clientManager = new ClientDaoImpl();
+	ReservationDaoImpl reservationManager = new ReservationDaoImpl();
 	
     /**
      * Default constructor. 
@@ -70,8 +78,43 @@ public class ClientController extends HttpServlet {
 			client.setClientPhone(phone);
 			
 			/* Insert the new client in the db */
-			dataManager.addClient(client);
+			clientManager.addClient(client);
 			RequestDispatcher rd = request.getRequestDispatcher("add_Client.jsp");
+			rd.forward(request, response);
+		}
+		
+		/*Update Client DATA*/
+		if (request.getParameter("updateClient") != null) {
+			Integer clientID = java.lang.Integer.parseInt(request.getParameter("updateClient"));
+			
+			/* Fetch Data from HTML Form*/
+			String name = request.getParameter("name");
+			String surname = request.getParameter("surname");
+			String b = request.getParameter("birthday");
+			Date birthDay = null;
+			/* Fetch and convert the date */
+			DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+			try {
+				birthDay = df.parse(b);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			String address = request.getParameter("address");
+			Integer cnp = java.lang.Integer.parseInt(request.getParameter("cnp"));
+			String email = request.getParameter("email");
+			Integer phone = java.lang.Integer.parseInt(request.getParameter("phone"));
+			
+			/* Update */
+			clientManager.updateClient(clientID, name, surname, birthDay, address, clientID, email, phone);
+			
+
+			/* Get Updated Data and Refresh the page*/
+			Client pClient = clientManager.getClient(clientID);
+			
+			request.setAttribute("clientData", pClient);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("profile_Client.jsp");
 			rd.forward(request, response);
 		}
 	}
@@ -85,8 +128,53 @@ public class ClientController extends HttpServlet {
 		
 		if (request.getParameter("showAllClients") != null) {
 			List<Client> clientPool = new ArrayList();
-			clientPool = dataManager.printClientData();
+			clientPool = clientManager.printClientData();
 			request.setAttribute("clientPool", clientPool);
+			RequestDispatcher rd = request.getRequestDispatcher("table_Clients.jsp");
+			rd.forward(request, response);
+		}
+		
+		/* View Client DATA*/
+		
+		if (request.getParameter("editClient") != null) {
+			Integer clientID = java.lang.Integer.parseInt(request.getParameter("editClient"));
+			
+			Client pClient = clientManager.getClient(clientID);
+			
+			/*String 
+			Date birthDay = null;
+			/* Fetch and convert the date 
+			DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+			try {
+				birthDay = df.parse(pClient.getClientBirthDay());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}*/
+			
+			java.util.Set reservationsPool = pClient.getReservations();
+			//reservationsPool = reservationManager.printReservationsForClientData(clientID);
+			
+			request.setAttribute("clientData", pClient);
+			request.setAttribute("reservationHistyory", reservationsPool);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("profile_Client.jsp");
+			rd.forward(request, response);
+		}
+		
+		/* Delete Client */
+		
+		if (request.getParameter("deleteClient") != null) {
+			Integer clientID = java.lang.Integer.parseInt(request.getParameter("deleteClient"));
+			
+			/* Delete the Client*/
+			client.setClientID(clientID);
+			clientManager.deleteClient(client);
+			
+			/* Get Updated DATA*/
+			List<Client> clientPool = new ArrayList();
+			clientPool = clientManager.printClientData();
+			request.setAttribute("clientPool", clientPool);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("table_Clients.jsp");
 			rd.forward(request, response);
 		}

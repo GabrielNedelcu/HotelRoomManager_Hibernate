@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-<!-- Required meta tags -->
+	<!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -150,13 +150,21 @@
 			      Add the new client
 			    </button>
 			  </div>
-			
+			  
 			  <script>
 			    $("#inputDoB").datepicker({
 			      uiLibrary: "bootstrap4",
 			    });
 			  </script>
 		  </form>
+		  
+	  	  <form action="ClientController" method="POST">
+	  		<div class="col-12">
+		    	<button type="submit" class="btn btn-primary mx-auto d-block" name="showAllClients" value="Show">
+			      	View All Clients
+			    </button>
+		  	</div>
+	  	  </form>
     </div>
    
    <!-- Bootrsap JS bundle-->

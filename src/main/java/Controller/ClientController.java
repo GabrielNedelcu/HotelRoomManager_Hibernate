@@ -34,6 +34,10 @@ public class ClientController extends HttpServlet {
 
     }
     
+    /**
+     * Implementation of doGet method
+     */
+    
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getParameter("addClient") != null) {
@@ -71,10 +75,21 @@ public class ClientController extends HttpServlet {
 			rd.forward(request, response);
 		}
 	}
-
+    
+    /**
+     * Implementation of doPost method
+     */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		/* Show the table containing all the clients*/
+		
+		if (request.getParameter("showAllClients") != null) {
+			List<Client> clientPool = new ArrayList();
+			clientPool = dataManager.printClientData();
+			request.setAttribute("clientPool", clientPool);
+			RequestDispatcher rd = request.getRequestDispatcher("table_Clients.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 }

@@ -116,7 +116,7 @@ public class RoomController extends HttpServlet {
      */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/* Show the table containing all the clients*/
+		/* Show the table containing all the rooms*/
 		
 		if (request.getParameter("showAllRooms") != null) {
 			List<Room> roomPool = new ArrayList();
@@ -150,12 +150,12 @@ public class RoomController extends HttpServlet {
 			
 		}
 		
-		/* Delete Client */
+		/* Delete room */
 		
 		if (request.getParameter("deleteRoom") != null) {
 			Integer roomID = java.lang.Integer.parseInt(request.getParameter("deleteRoom"));
 			
-			/* Delete the Client*/
+			/* Delete the room*/
 			room.setRoomId(roomID);
 			roomManager.deleteRoom(room);
 			

@@ -172,10 +172,31 @@ public class ReservationController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		/* Show the table containing all the reservations*/
+		
 		if (request.getParameter("showAllReservations") != null) {
 			List<Reservation> reservationPool = new ArrayList();
 			reservationPool = reservationManager.printReservationData();
 			request.setAttribute("reservationPool", reservationPool);
+			RequestDispatcher rd = request.getRequestDispatcher("table_Reservations.jsp");
+			rd.forward(request, response);
+		}
+		
+		/* Delete room */
+		
+		if (request.getParameter("deleteReservation") != null) {
+			Integer reservationID = java.lang.Integer.parseInt(request.getParameter("deleteReservation"));
+			
+			/* Delete the room*/
+			reservation.setReservationID(reservationID);
+			reservationManager.deleteReservation(reservation);
+			
+			/* Get Updated DATA*/
+			List<Reservation> reservationPool = new ArrayList();
+			reservationPool = reservationManager.printReservationData();
+			request.setAttribute("reservationPool", reservationPool);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("table_Reservations.jsp");
 			rd.forward(request, response);
 		}

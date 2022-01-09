@@ -78,14 +78,14 @@
 						</form>
 					</td>
 					<td>
-						<form action="RservationController" method="POST">
+						<form action="ReservationController" method="POST">
 							<button type="submit" class="btn btn-primary" name="editReservation" value="${reservation.reservationID}">
 	      						Edit Reservation
 	    					</button>
 						</form>
 					</td>
 					<td>
-						<form action="RservationController" method="POST">
+						<form action="ReservationController" method="POST">
 							<button type="submit" class="btn btn-danger" name="deleteReservation" value="${reservation.reservationID}">
 	      						Delete Reservation
 	    					</button>

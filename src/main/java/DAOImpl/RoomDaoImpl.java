@@ -14,6 +14,7 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import pojo.Client;
 import pojo.Room;
 import DAO.RoomDao;
 
@@ -81,6 +82,18 @@ public class RoomDaoImpl implements RoomDao{
 		
 		/* Close the connection */
 		session.close();
+	}
+	
+	@Override
+	public Room getRoom(Integer pRoomID) {
+		/* Get session and open transaction */
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = session.beginTransaction();
+		
+		/* Get the client with the given id*/
+		Room room = (Room) session.load(Room.class, pRoomID);
+		
+		return room;
 	}
 	
 }

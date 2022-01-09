@@ -3,6 +3,7 @@ package DAO;
 import java.util.List;
 import java.util.Date;
 
+import pojo.Client;
 import pojo.Room;
 
 public interface RoomDao {
@@ -12,4 +13,5 @@ public interface RoomDao {
 			 				Double pRoomPrice, String pRoomType, Boolean pRoomSmoking,
 			 				Date pRoomNextAvaliableDate);
 	public void deleteRoom (Room pRoom);
+	public Room getRoom(Integer pRoomID);
 }

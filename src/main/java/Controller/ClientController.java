@@ -112,7 +112,10 @@ public class ClientController extends HttpServlet {
 			/* Get Updated Data and Refresh the page*/
 			Client pClient = clientManager.getClient(clientID);
 			
+			java.util.Set reservationsPool = pClient.getReservations();
+			
 			request.setAttribute("clientData", pClient);
+			request.setAttribute("reservationHistyory", reservationsPool);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("profile_Client.jsp");
 			rd.forward(request, response);

@@ -42,7 +42,7 @@
 			<tbody>
 				<c:forEach var="room" items="${roomPool}">
 					<tr>
-						<!-- Client DATA -->
+						<!-- Room DATA -->
 						<td> ${room.roomId} </td>
 						<td> ${room.roomNumber} </td>
 						<td> ${room.roomFloor} </td>

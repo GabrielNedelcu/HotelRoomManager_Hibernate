@@ -161,7 +161,7 @@
 			  </div>
 		</form>
 		
-		<form action="RoomController" method="POST">
+		<form action="ReservationController" method="POST">
 	  		<div class="col-12">
 		    	<button type="submit" class="btn btn-primary mx-auto d-block" name="showAllReservations" value="Show">
 			      	View All Reservations

@@ -172,8 +172,13 @@ public class ReservationController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		if (request.getParameter("showAllReservations") != null) {
+			List<Reservation> reservationPool = new ArrayList();
+			reservationPool = reservationManager.printReservationData();
+			request.setAttribute("reservationPool", reservationPool);
+			RequestDispatcher rd = request.getRequestDispatcher("table_Reservations.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 }

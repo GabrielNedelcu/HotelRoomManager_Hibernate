@@ -22,7 +22,7 @@
 </head>
 <body>
 	<div class = "container">
-		<h1 align="center"> All clients </h1>
+		<h1 align="center"> All Rooms </h1>
 		<!-- Data Table -->
 		<table class="table table-hover">
 			<thead>

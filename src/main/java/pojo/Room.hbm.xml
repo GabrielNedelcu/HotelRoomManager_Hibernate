@@ -28,7 +28,7 @@
 	 
 	 <set name="reservations" table="reservations" inverse="true" lazy="true" fetch="select">
 	 	<key>
-	 		<column name="roomId" />
+	 		<column name="idroom" />
 	 	</key>
 	 	<one-to-many class="pojo.Reservation" />
 	 </set>

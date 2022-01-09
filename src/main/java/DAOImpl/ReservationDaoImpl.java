@@ -90,4 +90,16 @@ public class ReservationDaoImpl implements ReservationDao{
 		
 	}
 	
+	@Override
+	public Reservation getReservation (Integer pReservationID) {
+		/* Get session and open transaction */
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = session.beginTransaction();
+		
+		/* Get the reservation with the given id*/
+		Reservation reservation = (Reservation) session.load(Reservation.class, pReservationID);
+		
+		return reservation;
+	}
+	
 }

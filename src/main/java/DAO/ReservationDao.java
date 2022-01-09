@@ -14,4 +14,5 @@ public interface ReservationDao {
 								   Date pReservationStartDate, Date pReservationEndDate, Boolean pReservationParking,       
 								   Boolean pReservationBreakfast, Boolean pReservationDinner, Double pReservationTotalPrice);
 	public void deleteReservation (Reservation pReservation);
+	public Reservation getReservation (Integer pReservationID);
 }

@@ -206,14 +206,14 @@
 								<!-- Edit/Delete Buttons -->
 								<td>
 									<form action="ReservationController" method="POST">
-										<button type="submit" class="btn btn-primary" name="viewReservation" value="${reservation.reservationID}">
+										<button type="submit" class="btn btn-primary" name="editReservation" value="${reservation.reservationID}">
 				      						Edit
 				    					</button>
 									</form>
 								</td>
 								<td>
 									<form action="ReservationController" method="POST">
-										<button type="submit" class="btn btn-danger" name="deleteReservation" value="${reservation.reservationID}">
+										<button type="submit" class="btn btn-danger" name="editReservation" value="${reservation.reservationID}">
 				      						Delete
 				    					</button>
 									</form>

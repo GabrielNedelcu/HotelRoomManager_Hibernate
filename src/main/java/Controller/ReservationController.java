@@ -166,6 +166,93 @@ public class ReservationController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("add_Reservation.jsp");
 			rd.forward(request, response);
     	}
+    	
+    	/* Update an already existing reservation*/
+    	
+    	if (request.getParameter("updateReservation") != null) {
+    		
+    		Integer reservationID = java.lang.Integer.parseInt(request.getParameter("updateReservation"));
+    		
+    		/* Fetch Data from HTML Form*/
+    		
+    		Integer roomID = java.lang.Integer.parseInt(request.getParameter("roomID"));
+    		Integer clientID = java.lang.Integer.parseInt(request.getParameter("clientID"));
+    		
+    		Session session = HibernateUtil.getSessionFactory().openSession();
+    		
+    		Room room = (Room) session.get(Room.class, roomID);
+    		Client client = (Client) session.get(Client.class, clientID);
+    		
+    		/* Fetch and convert the start date */
+    		String strStartDate = request.getParameter("startDate");
+			Date startDate = null;
+			DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+			try {
+				startDate = df.parse(strStartDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			/* Fetch and convert the end date */
+    		String strEndDate = request.getParameter("endDate");
+			Date endDate = null;
+			try {
+				endDate = df.parse(strEndDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			String checked;
+			
+			Boolean	parking = false;
+			checked = request.getParameter("parking");
+			if (checked != null)
+				if (checked.equals("on"))
+					parking = true;
+			
+			Boolean	breakfast = false;
+			checked = request.getParameter("breakfast");
+			if (checked != null)
+				if (checked.equals("on"))
+					breakfast = true;
+			
+			Boolean	dinner = false;
+			checked = request.getParameter("dinner");
+			if (checked != null)
+				if (checked.equals("on"))
+					dinner = true;
+			
+			/* Set the total price of the reservation */
+			LocalDate startLocalDate = startDate.toInstant()
+				      .atZone(ZoneId.systemDefault())
+				      .toLocalDate();
+			LocalDate endLocalDate = endDate.toInstant()
+				      .atZone(ZoneId.systemDefault())
+				      .toLocalDate();
+			long daysBetween = ChronoUnit.DAYS.between(startLocalDate, endLocalDate);
+			double totalPrice = daysBetween * room.getRoomPrice();
+			
+			/* Update the reservation */
+			reservationManager.updateReservation(reservationID, room, client, startDate, endDate, parking, breakfast, dinner, totalPrice);
+			
+			/* Get the room with the given ID*/
+			Reservation pReservation = reservationManager.getReservation(reservationID);
+			
+			/* Get all the clients */
+			List<Client> clientPool = new ArrayList();
+			clientPool = clientManager.printClientData();
+			
+			/* Get all the rooms */
+			List<Room> roomPool = new ArrayList();
+			roomPool = roomManager.printRoomData();
+			
+			request.setAttribute("roomPool", roomPool);
+			request.setAttribute("clientPool", clientPool);
+			request.setAttribute("reservationData", pReservation);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("profile_Reservation.jsp");
+			rd.forward(request, response);
+    	}
 	}
 
 	/**
@@ -180,6 +267,30 @@ public class ReservationController extends HttpServlet {
 			reservationPool = reservationManager.printReservationData();
 			request.setAttribute("reservationPool", reservationPool);
 			RequestDispatcher rd = request.getRequestDispatcher("table_Reservations.jsp");
+			rd.forward(request, response);
+		}
+		
+		/* View Reservation DATA*/
+		
+		if (request.getParameter("editReservation") != null) {
+			Integer reservationID = java.lang.Integer.parseInt(request.getParameter("editReservation"));
+		
+			/* Get the room with the given ID*/
+			Reservation pReservation = reservationManager.getReservation(reservationID);
+			
+			/* Get all the clients */
+			List<Client> clientPool = new ArrayList();
+			clientPool = clientManager.printClientData();
+			
+			/* Get all the rooms */
+			List<Room> roomPool = new ArrayList();
+			roomPool = roomManager.printRoomData();
+			
+			request.setAttribute("roomPool", roomPool);
+			request.setAttribute("clientPool", clientPool);
+			request.setAttribute("reservationData", pReservation);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("profile_Reservation.jsp");
 			rd.forward(request, response);
 		}
 		

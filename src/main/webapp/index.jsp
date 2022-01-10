@@ -31,15 +31,29 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/home">Home</a>
+            	<form action="">
+            		<a class="nav-link active" aria-current="page" href="/home">Home</a>
+            	</form>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Rooms
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="add_Client.html">View Rooms</a></li>
-                <li><a class="dropdown-item" href="/add_Room.jsp">Add a Room</a></li>
+                <li>
+                	<form action="RoomController" method="POST">
+                		<button type="submit" class="dropdown-item" name="showAllRooms" value="Show">
+                			View Rooms
+                		</button>
+                	</form>
+                </li>
+                <li>
+                	<form action="RoomController" method="GET">
+                		<button type="submit" class="dropdown-item" name="addRoom" value="Add">
+                			Add a Room
+                		</button>
+                	</form>
+                </li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -47,8 +61,20 @@
                 Clients
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="/view-clients">View Clients</a></li>
-                <li><a class="dropdown-item" href="/add-client">Add a Client</a></li>
+                <li>
+                	<form action="ClientController" method="POST">
+                		<button type="submit" class="dropdown-item" name="showAllClients" value="Show">
+                			View Clients
+                		</button>
+                	</form>
+                </li>
+                <li>
+                	<form action="ClientController" method="GET">
+                		<button type="submit" class="dropdown-item" name="addClient" value="Add">
+                			Add a Client
+                		</button>
+                	</form>
+                </li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -56,8 +82,20 @@
                 Reservations
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="/view-reservations">View Reservations History</a></li>
-                <li><a class="dropdown-item" href="/make-reservation">Create Reservation</a></li>
+                <li>
+                	<form action="ReservationController" method="POST">
+                		<button type="submit" class="dropdown-item" name="showAllReservations" value="Show">
+                			View Reservations History
+                		</button>
+                	</form>
+                </li>
+                <li>
+                	<form action="ReservationController" method="GET">
+                		<button type="submit" class="dropdown-item" name="addReservation" value="Add">
+                			Create Reservation
+                		</button>
+                	</form>
+                </li>
               </ul>
             </li>
           </ul>

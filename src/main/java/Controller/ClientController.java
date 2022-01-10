@@ -50,6 +50,15 @@ public class ClientController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getParameter("addClient") != null) {
 			
+			if (request.getParameter("name") == null) {
+				/* Invalid Data - NOTHING TO DO */
+    			/* initialize the data, reload page */
+				
+				RequestDispatcher rd = request.getRequestDispatcher("add_Client.jsp");
+				rd.forward(request, response);
+				
+				return;
+			}
 			/* Fetch Data from HTML Form*/
 			String name = request.getParameter("name");
 			String surname = request.getParameter("surname");

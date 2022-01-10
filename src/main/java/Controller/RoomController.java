@@ -48,6 +48,16 @@ public class RoomController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getParameter("addRoom") != null) {
 			
+			if (request.getParameter("roomNumber") == null) {
+				/* Invalid Data - NOTHING TO DO */
+    			/* initialize the data, reload page */
+				
+				RequestDispatcher rd = request.getRequestDispatcher("add_Room.jsp");
+				rd.forward(request, response);
+				
+				return;
+			}
+			
 			/* Fetch Data from HTML Form*/
 			Integer number = java.lang.Integer.parseInt(request.getParameter("roomNumber"));
 			Integer floor = java.lang.Integer.parseInt(request.getParameter("roomFloor"));

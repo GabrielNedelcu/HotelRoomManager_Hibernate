@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
+
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -21,17 +23,25 @@ import DAO.RoomDao;
 public class RoomDaoImpl implements RoomDao{
 
 	@Override
-	public void addRoom(Room pRoom) {
+	public Boolean addRoom(Room pRoom) {
+		Boolean actionResult = false;
 		/* Get session and open transaction */
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = session.beginTransaction();
 		
 		/* save & commit the new room */
-		session.save(pRoom);
-		transaction.commit();
+		try {
+			session.save(pRoom);
+			transaction.commit();
+			
+			actionResult = true;
+		} catch (HibernateException hibernateEx) {
+		}
 		
 		/* Close the connection */
 		session.close();
+		
+		return actionResult;
 	}
 
 	@Override
@@ -44,8 +54,10 @@ public class RoomDaoImpl implements RoomDao{
 	}
 
 	@Override
-	public void updateRoom(Integer pRoomId, Integer pRoomNumber, Integer pRoomFloor, Double pRoomPrice,
+	public Boolean updateRoom(Integer pRoomId, Integer pRoomNumber, Integer pRoomFloor, Double pRoomPrice,
 			String pRoomType, Boolean pRoomSmoking, Date pRoomNextAvaliableDate) {
+		Boolean actionResult = false;
+		
 		/* Get session and open transaction */
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = session.beginTransaction();
@@ -63,25 +75,43 @@ public class RoomDaoImpl implements RoomDao{
 		room.setRoomNextAvaliableDate(pRoomNextAvaliableDate);
 		
 		/* Update & commit the changes */
-		session.update(room);
-		transaction.commit();
+		
+		try {
+			session.update(room);
+			transaction.commit();
+			
+			actionResult = true;
+		} catch (HibernateException hibernateEx) {
+		}
 		
 		/* Close the connection */
 		session.close();
+		
+		return actionResult;
 	}
 
 	@Override
-	public void deleteRoom(Room pRoom) {
+	public Boolean deleteRoom(Room pRoom) {
+		Boolean actionResult = false;
+		
 		/* Get session and open transaction */
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = session.beginTransaction();
 		
 		/* delete the room & commit transaction*/
-		session.delete(pRoom);
-		transaction.commit();
+		
+		try {
+			session.delete(pRoom);
+			transaction.commit();
+			
+			actionResult = true;
+		} catch (HibernateException hibernateEx) {
+		}
 		
 		/* Close the connection */
 		session.close();
+		
+		return actionResult;
 	}
 	
 	@Override

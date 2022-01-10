@@ -78,7 +78,9 @@ public class RoomController extends HttpServlet {
 			room.setRoomSmoking(smoking);
 			
 			/* Insert the new room in the db */
-			roomManager.addRoom(room);
+			Boolean bResult = roomManager.addRoom(room);
+			request.setAttribute("actionResult", bResult);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("add_Room.jsp");
 			rd.forward(request, response);
 		}
@@ -100,7 +102,9 @@ public class RoomController extends HttpServlet {
 			 
 			
 			/* Update */
-			roomManager.updateRoom(roomID, number, floor, price, type, smoking, null);
+			Boolean bResult = roomManager.updateRoom(roomID, number, floor, price, type, smoking, null);
+			
+			request.setAttribute("actionResult", bResult);
 			
 			/* Get Updated Data and Refresh the page*/
 			Room pRoom = roomManager.getRoom(roomID);
@@ -167,7 +171,9 @@ public class RoomController extends HttpServlet {
 			
 			/* Delete the room*/
 			room.setRoomId(roomID);
-			roomManager.deleteRoom(room);
+			Boolean bResult = roomManager.deleteRoom(room);
+			
+			request.setAttribute("actionResult", bResult);
 			
 			/* Get Updated DATA*/
 			List<Room> roomPool = new ArrayList();

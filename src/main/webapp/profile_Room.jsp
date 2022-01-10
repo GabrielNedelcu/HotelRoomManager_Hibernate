@@ -104,6 +104,31 @@
       </div>
     </nav>
     
+    <!--  User Flash Messages -->
+    <c:choose>
+    <c:when test="${actionResult != null}">
+	   <c:choose>
+	   		<c:when test="${actionResult == false}">
+	      		<div class="alert alert-danger alter-dismissable fade show" role="alert">
+              		There was an error! Please verify the validity of your data!
+              		<button type="button" class="close" data-dismiss="alert">
+                		<span aria-hidden="true">&times;</span>
+              		</button>
+            	</div>
+			</c:when>
+			<c:otherwise>
+				<div class="alert alert-success alter-dismissable fade show" role="alert">
+              		Room succesfully updated!
+              		<button type="button" class="close" data-dismiss="alert">
+                		<span aria-hidden="true">&times;</span>
+              		</button>
+            	</div>
+			</c:otherwise>	
+	   </c:choose>
+	</c:when>
+	<c:otherwise>
+	</c:otherwise>	
+	</c:choose>		
     
 	<div class = "container">
 		<form class="row g-3 needs-validation" action="RoomController" method="GET" >

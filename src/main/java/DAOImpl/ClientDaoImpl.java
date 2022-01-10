@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
+
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -20,17 +22,25 @@ import DAO.ClientDao;
 public class ClientDaoImpl implements ClientDao{
 	
 	@Override
-	public void addClient (Client pClient) {
+	public Boolean addClient (Client pClient) {
+		Boolean actionResult = false;
 		/* Get session and open transaction */
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = session.beginTransaction();
 		
 		/* save & commit the new client */
-		session.save(pClient);
-		transaction.commit();
+		try {
+			session.save(pClient);
+			transaction.commit();
+			
+			actionResult = true;
+		} catch (HibernateException hibernateEx) {
+		}
 		
 		/* Close the connection */
 		session.close();
+		
+		return actionResult;
 	}
 
 	@Override
@@ -44,8 +54,10 @@ public class ClientDaoImpl implements ClientDao{
 	}
 
 	@Override
-	public void updateClient(Integer pclientID, String pclientName, String pclientSurname, Date pclientBirthDay,
+	public Boolean updateClient(Integer pclientID, String pclientName, String pclientSurname, Date pclientBirthDay,
 							 String pclientAdress, Integer pclientCNP, String pclientEmail, Integer pclientPhone) {
+		Boolean actionResult = false;
+		
 		/* Get session and open transaction */
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = session.beginTransaction();
@@ -63,25 +75,41 @@ public class ClientDaoImpl implements ClientDao{
 		client.setClientPhone(pclientPhone);
 		
 		/* Update & commit the changes */
-		session.update(client);
-		transaction.commit();
+		try {
+			session.update(client);
+			transaction.commit();
+			
+			actionResult = true;
+		} catch (HibernateException hibernateEx) {
+		}
 		
 		/* Close the connection */
 		session.close();
+		
+		return actionResult;
 	}
 
 	@Override
-	public void deleteClient(Client pClient) {
+	public Boolean deleteClient(Client pClient) {
+		Boolean actionResult = false;
+		
 		/* Get session and open transaction */
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = session.beginTransaction();
 		
 		/* delete the client & commit transaction*/
-		session.delete(pClient);
-		transaction.commit();
+		try {
+			session.delete(pClient);
+			transaction.commit();
+			
+			actionResult = true;
+		} catch (HibernateException hibernateEx) {
+		}
 		
 		/* Close the connection */
 		session.close();
+		
+		return actionResult;
 	}
 	
 	@Override

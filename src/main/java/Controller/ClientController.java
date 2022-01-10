@@ -87,7 +87,9 @@ public class ClientController extends HttpServlet {
 			client.setClientPhone(phone);
 			
 			/* Insert the new client in the db */
-			clientManager.addClient(client);
+			Boolean bResult = clientManager.addClient(client);
+			
+			request.setAttribute("actionResult", bResult);
 			RequestDispatcher rd = request.getRequestDispatcher("add_Client.jsp");
 			rd.forward(request, response);
 		}
@@ -115,8 +117,9 @@ public class ClientController extends HttpServlet {
 			Integer phone = java.lang.Integer.parseInt(request.getParameter("phone"));
 			
 			/* Update */
-			clientManager.updateClient(clientID, name, surname, birthDay, address, clientID, email, phone);
+			Boolean bResult = clientManager.updateClient(clientID, name, surname, birthDay, address, cnp, email, phone);
 			
+			request.setAttribute("actionResult", bResult);
 
 			/* Get Updated Data and Refresh the page*/
 			Client pClient = clientManager.getClient(clientID);
@@ -164,7 +167,6 @@ public class ClientController extends HttpServlet {
 			}*/
 			
 			java.util.Set reservationsPool = pClient.getReservations();
-			//reservationsPool = reservationManager.printReservationsForClientData(clientID);
 			
 			request.setAttribute("clientData", pClient);
 			request.setAttribute("reservationHistyory", reservationsPool);
@@ -180,7 +182,9 @@ public class ClientController extends HttpServlet {
 			
 			/* Delete the Client*/
 			client.setClientID(clientID);
-			clientManager.deleteClient(client);
+			Boolean bResult = clientManager.deleteClient(client);
+			
+			request.setAttribute("actionResult", bResult);
 			
 			/* Get Updated DATA*/
 			List<Client> clientPool = new ArrayList();

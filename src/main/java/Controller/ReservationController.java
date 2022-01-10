@@ -150,7 +150,9 @@ public class ReservationController extends HttpServlet {
 			reservation.setReservationTotalPrice(daysBetween * room.getRoomPrice());
 			
 			/* Insert the new reservation in the db */
-			reservationManager.addReservation(reservation);
+			Boolean bResult = reservationManager.addReservation(reservation);
+			
+			request.setAttribute("actionResult", bResult);
 			
 			/* Get all the clients */
 			List<Client> clientPool = new ArrayList();
@@ -233,7 +235,9 @@ public class ReservationController extends HttpServlet {
 			double totalPrice = daysBetween * room.getRoomPrice();
 			
 			/* Update the reservation */
-			reservationManager.updateReservation(reservationID, room, client, startDate, endDate, parking, breakfast, dinner, totalPrice);
+			Boolean bResult = reservationManager.updateReservation(reservationID, room, client, startDate, endDate, parking, breakfast, dinner, totalPrice);
+			
+			request.setAttribute("actionResult", bResult);
 			
 			/* Get the room with the given ID*/
 			Reservation pReservation = reservationManager.getReservation(reservationID);
@@ -301,7 +305,9 @@ public class ReservationController extends HttpServlet {
 			
 			/* Delete the room*/
 			reservation.setReservationID(reservationID);
-			reservationManager.deleteReservation(reservation);
+			Boolean bResult = reservationManager.deleteReservation(reservation);
+			
+			request.setAttribute("actionResult", bResult);
 			
 			/* Get Updated DATA*/
 			List<Reservation> reservationPool = new ArrayList();

@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
+
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -22,17 +24,27 @@ import DAO.ReservationDao;
 public class ReservationDaoImpl implements ReservationDao{
 
 	@Override
-	public void addReservation(Reservation pReservation) {
+	public Boolean addReservation(Reservation pReservation) {
+		Boolean actionResult = false;
+		
 		/* Get session and open transaction */
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = session.beginTransaction();
 		
 		/* save & commit the new reservation */
-		session.save(pReservation);
-		transaction.commit();
+		
+		try {
+			session.save(pReservation);
+			transaction.commit();
+			
+			actionResult = true;
+		} catch (HibernateException hibernateEx) {
+		}
 		
 		/* Close the connection */
 		session.close();
+		
+		return actionResult;
 	}
 
 	@Override
@@ -45,9 +57,11 @@ public class ReservationDaoImpl implements ReservationDao{
 	}
 
 	@Override
-	public void updateReservation(Integer pReservationID, Room pReservationRoomID, Client pReservationClientID,
+	public Boolean updateReservation(Integer pReservationID, Room pReservationRoomID, Client pReservationClientID,
 			Date pReservationStartDate, Date pReservationEndDate, Boolean pReservationParking,
 			Boolean pReservationBreakfast, Boolean pReservationDinner, Double pReservationTotalPrice) {
+		Boolean actionResult = false;
+		
 		/* Get session and open transaction */
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = session.beginTransaction();
@@ -67,27 +81,44 @@ public class ReservationDaoImpl implements ReservationDao{
 		reservation.setReservationTotalPrice(pReservationTotalPrice);
 		
 		/* Update & commit the changes */
-		session.update(reservation);
-		transaction.commit();
+		
+		try {
+			session.update(reservation);
+			transaction.commit();
+			
+			actionResult = true;
+		} catch (HibernateException hibernateEx) {
+		}
+		
 		
 		/* Close the connection */
 		session.close();
 		
+		return actionResult;
 	}
 
 	@Override
-	public void deleteReservation(Reservation pReservation) {
+	public Boolean deleteReservation(Reservation pReservation) {
+		Boolean actionResult = false;
+		
 		/* Get session and open transaction */
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = session.beginTransaction();
 		
 		/* delete the reservation & commit transaction*/
-		session.delete(pReservation);
-		transaction.commit();
 		
+		try {
+			session.delete(pReservation);
+			transaction.commit();
+			
+			actionResult = true;
+		} catch (HibernateException hibernateEx) {
+		}
+
 		/* Close the connection */
 		session.close();
 		
+		return actionResult;
 	}
 	
 	@Override

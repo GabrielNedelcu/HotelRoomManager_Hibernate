@@ -8,11 +8,11 @@ import pojo.Reservation;
 import pojo.Room;
 
 public interface ReservationDao {
-	public void addReservation (Reservation pReservation);
+	public Boolean addReservation (Reservation pReservation);
 	public List<Reservation> printReservationData();
-	public void updateReservation (Integer pReservationID, Room pReservationRoomID, Client pReservationClientID,            
+	public Boolean updateReservation (Integer pReservationID, Room pReservationRoomID, Client pReservationClientID,            
 								   Date pReservationStartDate, Date pReservationEndDate, Boolean pReservationParking,       
 								   Boolean pReservationBreakfast, Boolean pReservationDinner, Double pReservationTotalPrice);
-	public void deleteReservation (Reservation pReservation);
+	public Boolean deleteReservation (Reservation pReservation);
 	public Reservation getReservation (Integer pReservationID);
 }

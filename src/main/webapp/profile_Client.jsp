@@ -108,7 +108,7 @@
 	<div class = "container">
 		<h1 align="center">${clientData.clientName} ${clientData.clientSurname}'s Profile</h1>
 		
-	      <form class="row g-3 needs-validation" action="ClientController" method="GET">
+	      <form class="row g-3 needs-validation" novalidate action="ClientController" method="GET">
 		
 			  <!-- Client Name -->
 			
@@ -314,5 +314,6 @@
    
    <!-- Bootrsap JS bundle-->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> 
+   <script src="form_validation.js"> </script>
 </body>
 </html>

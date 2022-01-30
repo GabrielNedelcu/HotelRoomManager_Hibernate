@@ -12,9 +12,9 @@ public class Client implements java.io.Serializable {
 	private String	clientSurname;
 	private	Date	clientBirthDay;
 	private String	clientAddress;
-	private Integer	clientCNP;
+	private Long	clientCNP;
 	private String	clientEmail;
-	private	Integer	clientPhone;
+	private	Long	clientPhone;
 	
 	private Set 	reservations = new HashSet(0);
 	
@@ -30,9 +30,9 @@ public class Client implements java.io.Serializable {
 		this.setClientSurname("");
 		this.setClientBirthDay(new Date());
 		this.setClientAddress("");
-		this.setClientCNP(0);
+		this.setClientCNP(Long.valueOf(0));
 		this.setClientEmail("");
-		this.setClientPhone(0);
+		this.setClientPhone(Long.valueOf(0));
 	}
 	
 	/**
@@ -48,8 +48,8 @@ public class Client implements java.io.Serializable {
 	 */
 	
 	public Client(Integer pclientID, String pclientName, String	pclientSurname, 
-				  Date pclientBirthDay, String pclientAdress, Integer pclientCNP,
-				  String pclientEmail, Integer pclientPhone, Set pReservations) {
+				  Date pclientBirthDay, String pclientAdress, Long pclientCNP,
+				  String pclientEmail, Long pclientPhone, Set pReservations) {
 		this.setClientID(pclientID);
 		this.setClientName(pclientName);
 		this.setClientSurname(pclientSurname);
@@ -154,28 +154,28 @@ public class Client implements java.io.Serializable {
 	/**
 	 * @return the clientPhone
 	 */
-	public Integer getClientPhone() {
+	public Long getClientPhone() {
 		return clientPhone;
 	}
 
 	/**
 	 * @param clientPhone the clientPhone to set
 	 */
-	public void setClientPhone(Integer clientPhone) {
+	public void setClientPhone(Long clientPhone) {
 		this.clientPhone = clientPhone;
 	}
 
 	/**
 	 * @return the clientCNP
 	 */
-	public Integer getClientCNP() {
+	public Long getClientCNP() {
 		return clientCNP;
 	}
 
 	/**
 	 * @param clientCNP the clientCNP to set
 	 */
-	public void setClientCNP(Integer clientCNP) {
+	public void setClientCNP(Long clientCNP) {
 		this.clientCNP = clientCNP;
 	}
 

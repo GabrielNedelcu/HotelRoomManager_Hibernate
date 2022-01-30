@@ -19,13 +19,13 @@
 	 <property name="clientAddress" type="string">
 	 	<column name="adress" length="45" />
 	 </property>
-	 <property name="clientCNP" type="java.lang.Integer">
+	 <property name="clientCNP" type="java.lang.Long">
 	 	<column name="cnp"/>
 	 </property>
 	 <property name="clientEmail" type="string">
 	 	<column name="email" length="45" />
 	 </property>
-	  <property name="clientPhone" type="java.lang.Integer">
+	  <property name="clientPhone" type="java.lang.Long">
 	 	<column name="phone"/>
 	 </property>
 	 

@@ -52,10 +52,11 @@ public class ClientDaoImpl implements ClientDao{
 		return clientsList;
 
 	}
-
+	
 	@Override
-	public Boolean updateClient(Integer pclientID, String pclientName, String pclientSurname, Date pclientBirthDay,
-							 String pclientAdress, Integer pclientCNP, String pclientEmail, Integer pclientPhone) {
+	public Boolean updateClient(Integer pclientID, String pclientName, String	pclientSurname,  
+			   Date pclientBirthDay, String pclientAdress, Long pclientCNP,
+			   String pclientEmail, Long pclientPhone) {
 		Boolean actionResult = false;
 		
 		/* Get session and open transaction */

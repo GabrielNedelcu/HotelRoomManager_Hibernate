@@ -161,7 +161,7 @@
 			    	<div class="input-group">
 			      		<span class="input-group-text">$</span>
 			      		<input
-			        		type="number"
+			        		type="double"
 			        		class="form-control"
 			        		id="inputPrice"
 			        		name="roomPrice"

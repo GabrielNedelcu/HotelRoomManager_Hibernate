@@ -73,9 +73,9 @@ public class ClientController extends HttpServlet {
 			}
 			
 			String address = request.getParameter("address");
-			Integer cnp = java.lang.Integer.parseInt(request.getParameter("cnp"));
+			Long cnp = java.lang.Long.parseLong(request.getParameter("cnp"));
 			String email = request.getParameter("email");
-			Integer phone = java.lang.Integer.parseInt(request.getParameter("phone"));
+			Long phone = java.lang.Long.parseLong(request.getParameter("phone"));
 			
 			/* Set the new data to the client */
 			client.setClientName(name);
@@ -112,9 +112,9 @@ public class ClientController extends HttpServlet {
 			}
 			
 			String address = request.getParameter("address");
-			Integer cnp = java.lang.Integer.parseInt(request.getParameter("cnp"));
+			Long cnp = java.lang.Long.parseLong(request.getParameter("cnp"));
 			String email = request.getParameter("email");
-			Integer phone = java.lang.Integer.parseInt(request.getParameter("phone"));
+			Long phone = java.lang.Long.parseLong(request.getParameter("phone"));
 			
 			/* Update */
 			Boolean bResult = clientManager.updateClient(clientID, name, surname, birthDay, address, cnp, email, phone);

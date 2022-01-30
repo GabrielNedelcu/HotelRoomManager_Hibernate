@@ -66,8 +66,9 @@ public class RoomController extends HttpServlet {
 			String checked = request.getParameter("canSmoke");
 			Boolean	smoking = false;
 			
-			if (checked.equals("on"))
-				smoking = true;
+			if (checked != null)
+				if (checked.equals("on"))
+					smoking = true;
 			 
 			
 			/* Set the new data to the room */

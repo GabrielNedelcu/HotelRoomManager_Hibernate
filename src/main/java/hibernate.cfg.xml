@@ -11,6 +11,7 @@
  <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
  <property name="hibernate.connection.username">root</property>
  <property name="hibernate.connection.password">a123321</property>
+ <property name="connection.pool_size">100</property>
  <mapping resource="pojo/Client.hbm.xml"/>
  <mapping resource="pojo/Room.hbm.xml"/>
  <mapping resource="pojo/Reservation.hbm.xml"/>

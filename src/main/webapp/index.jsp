@@ -105,6 +105,22 @@
 
 
     <div class = "container">
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+        <div class="row align-items-center h-100">
+            <div class="col-6 mx-auto">
+                <main role="main" class="inner cover" align="center">
+                    <h1 class="cover-heading">Hotel Room Manager</h1>
+                    <p class="lead">Helping hotels better manage their clients, rooms and reservations!</p>
+                </main>
+
+                <footer class="mastfoot mt-auto" align="center">
+                    <div class="inner">
+                        <p>App made by <a href="">Nedelcu Gabriel</a>, 433B, for  <a href="">Proiectarea interfetelor pentru baze de date</a>.</p>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div> 
     </div>
 
     <!-- Bootrsap JS bundle-->
